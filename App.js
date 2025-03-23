@@ -12,7 +12,40 @@ import {
 } from "react-native";
 import { Inter_700Bold, useFonts } from "@expo-google-fonts/inter";
 import { useState } from "react";
-
+const RowView = ({ lebel, value }) => {
+  return (
+    <View
+      style={{
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
+    >
+      <Text
+        style={{
+          fontFamily: "Inter-Regular",
+          fontSize: 9,
+          letterSpacing: 2,
+          color: "black",
+          marginBottom: 8,
+          textTransform: "uppercase",
+        }}
+      >
+        {lebel}
+      </Text>
+      <Text
+        style={{
+          fontFamily: "Inter-Bold",
+          fontSize: 16,
+          letterSpacing: 2,
+          color: "black",
+        }}
+      >
+        {value}
+      </Text>
+    </View>
+  );
+};
 export default function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -145,6 +178,20 @@ export default function App() {
             <Image source={require("./assets/arrow-down.png")}></Image>
           </Pressable>
         </View>
+      </View>
+      {/* expanded view */}
+      <View
+        style={{
+          backgroundColor: "white",
+          opacity: 0.8,
+          paddingVertical: 8,
+          paddingHorizontal: 26,
+        }}
+      >
+        <RowView lebel={"Current TimeZone"} value={"Europe/London"}></RowView>
+        <RowView lebel={"Day of the Year"} value={"295"}></RowView>
+        <RowView lebel={"Day of the week"} value={"5"}></RowView>
+        <RowView lebel={"Week Number"} value={"42"}></RowView>
       </View>
     </ImageBackground>
   );
