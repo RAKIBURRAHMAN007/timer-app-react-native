@@ -49,6 +49,7 @@ const RowView = ({ lebel, value }) => {
 export default function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showMore, SetShowMore] = useState(false);
 
   let [fontLoaded] = useFonts({
     Inter_700Bold,
@@ -78,32 +79,38 @@ export default function App() {
         }}
       >
         {/* upper part */}
-        <View style={{ flexDirection: "row" }}>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              alignContent: "center",
-            }}
-          >
-            <Text
+        {!showMore && (
+          <View style={{ flexDirection: "row" }}>
+            <View
               style={{
-                fontSize: 18,
-                color: "white",
-                fontFamily: "Inter-Regular",
+                flex: 1,
+                justifyContent: "center",
+                alignContent: "center",
               }}
             >
-              The only way to do great work is to love what you do.
-            </Text>
+              <Text
+                style={{
+                  fontSize: 18,
+                  color: "white",
+                  fontFamily: "Inter-Regular",
+                }}
+              >
+                The only way to do great work is to love what you do.
+              </Text>
 
-            <Text
-              style={{ color: "white", fontFamily: "Inter-Bold", marginTop: 8 }}
-            >
-              -Steve Jobs
-            </Text>
+              <Text
+                style={{
+                  color: "white",
+                  fontFamily: "Inter-Bold",
+                  marginTop: 8,
+                }}
+              >
+                -Steve Jobs
+              </Text>
+            </View>
+            <Image source={require("./assets/refresh.png")}></Image>
           </View>
-          <Image source={require("./assets/refresh.png")}></Image>
-        </View>
+        )}
         {/* bottom part */}
         <View style={{ marginBottom: 36 }}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -150,7 +157,9 @@ export default function App() {
             </Text>
           </View>
           <Pressable
-            onPress={() => {}}
+            onPress={() => {
+              SetShowMore(!showMore);
+            }}
             style={{
               flexDirection: "row",
               height: 40,
@@ -173,26 +182,34 @@ export default function App() {
                 color: "black",
               }}
             >
-              MORE
+              {showMore ? "Less" : "More"}
             </Text>
-            <Image source={require("./assets/arrow-down.png")}></Image>
+            <Image
+              source={
+                showMore
+                  ? require("./assets/arrow-up.png")
+                  : require("./assets/arrow-down.png")
+              }
+            ></Image>
           </Pressable>
         </View>
       </View>
       {/* expanded view */}
-      <View
-        style={{
-          backgroundColor: "white",
-          opacity: 0.8,
-          paddingVertical: 8,
-          paddingHorizontal: 26,
-        }}
-      >
-        <RowView lebel={"Current TimeZone"} value={"Europe/London"}></RowView>
-        <RowView lebel={"Day of the Year"} value={"295"}></RowView>
-        <RowView lebel={"Day of the week"} value={"5"}></RowView>
-        <RowView lebel={"Week Number"} value={"42"}></RowView>
-      </View>
+      {showMore && (
+        <View
+          style={{
+            backgroundColor: "white",
+            opacity: 0.8,
+            paddingVertical: 8,
+            paddingHorizontal: 26,
+          }}
+        >
+          <RowView lebel={"Current TimeZone"} value={"Europe/London"}></RowView>
+          <RowView lebel={"Day of the Year"} value={"295"}></RowView>
+          <RowView lebel={"Day of the week"} value={"5"}></RowView>
+          <RowView lebel={"Week Number"} value={"42"}></RowView>
+        </View>
+      )}
     </ImageBackground>
   );
 }
