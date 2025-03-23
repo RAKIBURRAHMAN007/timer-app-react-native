@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   ImageBackground,
   Image,
+  Button,
+  Pressable,
 } from "react-native";
 import { Inter_700Bold, useFonts } from "@expo-google-fonts/inter";
 import { useState } from "react";
@@ -114,6 +116,34 @@ export default function App() {
               IN LONDON UK
             </Text>
           </View>
+          <Pressable
+            onPress={() => {}}
+            style={{
+              flexDirection: "row",
+              height: 40,
+              width: 150,
+              backgroundColor: "white",
+              borderRadius: 30,
+              borderColor: "white",
+              marginTop: 50,
+              justifyContent: "space-between",
+              paddingLeft: 16,
+              paddingRight: 4,
+              alignItems: "center",
+            }}
+          >
+            <Text
+              style={{
+                fontFamily: "Inter-Bold",
+                letterSpacing: 5,
+                fontSize: 12,
+                color: "black",
+              }}
+            >
+              MORE
+            </Text>
+            <Image source={require("./assets/arrow-down.png")}></Image>
+          </Pressable>
         </View>
       </View>
     </ImageBackground>
